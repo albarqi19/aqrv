@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 45 93% 58%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 32 95% 44%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 200 91% 50%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 270 91% 65%;
+
+    /* Light mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%), hsl(280 85% 75%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%), hsl(55 90% 68%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(240 4.8% 97%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(45 93% 58%) 100%);
+    
+    --shadow-glow: 0 0 40px hsl(270 91% 65% / 0.15);
+    --shadow-card: 0 8px 32px hsl(240 3.8% 46.1% / 0.1);
+    --shadow-accent: 0 4px 20px hsl(45 93% 58% / 0.15);
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-float: float 6s ease-in-out infinite;
+
+    --border-glow: 1px solid hsl(270 91% 65% / 0.15);
+    --glass-bg: hsla(0, 0%, 100%, 0.8);
+    --glass-border: hsla(270, 91%, 65%, 0.1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: 240 15% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 15% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 15% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 270 91% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 15% 12%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 240 15% 10%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 45 93% 58%;
+    --accent-foreground: 240 15% 6%;
+
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 32 95% 58%;
+    --warning-foreground: 240 15% 6%;
+
+    --info: 200 91% 65%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 240 15% 15%;
+    --input: 240 15% 12%;
+    --ring: 270 91% 65%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%), hsl(280 85% 75%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%), hsl(55 90% 68%));
+    --gradient-card: linear-gradient(145deg, hsl(240 15% 8%) 0%, hsl(240 18% 10%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(45 93% 58%) 100%);
+    
+    --shadow-glow: 0 0 40px hsl(270 91% 65% / 0.3);
+    --shadow-card: 0 8px 32px hsl(240 15% 4% / 0.4);
+    --shadow-accent: 0 4px 20px hsl(45 93% 58% / 0.3);
+    
+    --glass-bg: hsla(240, 15%, 8%, 0.8);
+    --glass-border: hsla(270, 91%, 65%, 0.1);
+    --border-glow: 1px solid hsl(270 91% 65% / 0.2);
+
+    --sidebar-background: 240 15% 6%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 270 91% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 12%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 15% 15%;
+    --sidebar-ring: 270 91% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: var(--glass-border);
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .card-hover {
+    transition: var(--transition-smooth);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-card);
+  }
+
+  .gradient-text {
+    background: var(--gradient-hero);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+    to { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+  }
+
+  /* Light mode specific styles */
+  :root .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Dark mode specific styles */
+  .dark .glass-card {
+    background: rgba(15, 16, 26, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Light mode gradient backgrounds */
+  :root .gradient-text {
+    background: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(45 93% 58%) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Ensure proper theme colors for backgrounds */
+  :root {
+    --bg-primary: rgb(255, 255, 255);
+    --bg-secondary: rgb(249, 250, 251);
+    --text-primary: rgb(17, 24, 39);
+    --text-secondary: rgb(107, 114, 128);
+  }
+
+  .dark {
+    --bg-primary: rgb(15, 16, 26);
+    --bg-secondary: rgb(20, 21, 33);
+    --text-primary: rgb(249, 250, 251);
+    --text-secondary: rgb(156, 163, 175);
+  }
+
+  /* حركة الدوران البطيئة للشعار */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGradient)" filter="url(#shadow)" stroke="#ffffff" stroke-width="1"/>
+  
+  <!-- Arabic letter "ق" -->
+  <text x="32" y="44" font-family="Arial, sans-serif" font-size="32" font-weight="bold" 
+        text-anchor="middle" fill="#ffffff" style="font-family: 'Tajawal', Arial, sans-serif;">ق</text>
+</svg>
