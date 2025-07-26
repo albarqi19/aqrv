@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://albarqi.byethost7.com/api';
+const API_BASE_URL = 'https://barq.fun/api';
 
 // Types for API responses
 export interface ApiResponse<T> {

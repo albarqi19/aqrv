@@ -8,27 +8,27 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light mode colors */
+    /* Light mode colors - Company Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 214 20% 30%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 214 20% 30%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 214 20% 30%;
 
-    --primary: 270 91% 65%;
+    --primary: 214 20% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 28 18% 85%;
+    --secondary-foreground: 214 20% 30%;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 28 18% 95%;
+    --muted-foreground: 28 15% 45%;
 
-    --accent: 45 93% 58%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 28 25% 65%;
+    --accent-foreground: 214 20% 30%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -42,61 +42,61 @@ All colors MUST be HSL.
     --info: 200 91% 50%;
     --info-foreground: 0 0% 100%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 270 91% 65%;
+    --border: 28 18% 90%;
+    --input: 28 18% 95%;
+    --ring: 214 20% 30%;
 
-    /* Light mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%), hsl(280 85% 75%));
-    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%), hsl(55 90% 68%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(240 4.8% 97%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(45 93% 58%) 100%);
+    /* Light mode gradients - Company Brand */
+    --gradient-primary: linear-gradient(135deg, hsl(214 20% 30%), hsl(214 25% 40%));
+    --gradient-accent: linear-gradient(135deg, hsl(28 25% 65%), hsl(28 30% 75%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(28 18% 97%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(214 20% 30%) 0%, hsl(28 25% 65%) 100%);
     
-    --shadow-glow: 0 0 40px hsl(270 91% 65% / 0.15);
-    --shadow-card: 0 8px 32px hsl(240 3.8% 46.1% / 0.1);
-    --shadow-accent: 0 4px 20px hsl(45 93% 58% / 0.15);
+    --shadow-glow: 0 0 40px hsl(214 20% 30% / 0.15);
+    --shadow-card: 0 8px 32px hsl(214 15% 20% / 0.1);
+    --shadow-accent: 0 4px 20px hsl(28 25% 65% / 0.15);
     
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --animation-float: float 6s ease-in-out infinite;
 
-    --border-glow: 1px solid hsl(270 91% 65% / 0.15);
+    --border-glow: 1px solid hsl(214 20% 30% / 0.15);
     --glass-bg: hsla(0, 0%, 100%, 0.8);
-    --glass-border: hsla(270, 91%, 65%, 0.1);
+    --glass-border: hsla(214, 20%, 30%, 0.1);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-background: 28 18% 98%;
+    --sidebar-foreground: 214 20% 30%;
+    --sidebar-primary: 214 20% 30%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 28 18% 95%;
+    --sidebar-accent-foreground: 214 20% 30%;
+    --sidebar-border: 28 18% 90%;
+    --sidebar-ring: 214 20% 30%;
   }
 
   .dark {
-    /* Dark mode colors */
-    --background: 240 15% 6%;
-    --foreground: 0 0% 98%;
+    /* Dark mode colors - Company Brand Dark */
+    --background: 214 25% 8%;
+    --foreground: 28 18% 95%;
 
-    --card: 240 15% 8%;
-    --card-foreground: 0 0% 95%;
+    --card: 214 20% 10%;
+    --card-foreground: 28 18% 90%;
 
-    --popover: 240 15% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 214 20% 10%;
+    --popover-foreground: 28 18% 90%;
 
-    --primary: 270 91% 65%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 28 25% 65%;
+    --primary-foreground: 214 25% 8%;
 
-    --secondary: 240 15% 12%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 214 20% 15%;
+    --secondary-foreground: 28 18% 80%;
 
-    --muted: 240 15% 10%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 214 20% 12%;
+    --muted-foreground: 28 15% 60%;
 
-    --accent: 45 93% 58%;
-    --accent-foreground: 240 15% 6%;
+    --accent: 28 30% 70%;
+    --accent-foreground: 214 25% 8%;
 
     --destructive: 0 85% 65%;
     --destructive-foreground: 0 0% 100%;
@@ -105,37 +105,37 @@ All colors MUST be HSL.
     --success-foreground: 0 0% 100%;
 
     --warning: 32 95% 58%;
-    --warning-foreground: 240 15% 6%;
+    --warning-foreground: 214 25% 8%;
 
     --info: 200 91% 65%;
     --info-foreground: 0 0% 100%;
 
-    --border: 240 15% 15%;
-    --input: 240 15% 12%;
-    --ring: 270 91% 65%;
+    --border: 214 15% 20%;
+    --input: 214 20% 15%;
+    --ring: 28 25% 65%;
 
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%), hsl(280 85% 75%));
-    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%), hsl(55 90% 68%));
-    --gradient-card: linear-gradient(145deg, hsl(240 15% 8%) 0%, hsl(240 18% 10%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(270 91% 65%) 0%, hsl(45 93% 58%) 100%);
+    /* Dark mode gradients - Company Brand */
+    --gradient-primary: linear-gradient(135deg, hsl(28 25% 65%), hsl(28 30% 75%));
+    --gradient-accent: linear-gradient(135deg, hsl(214 20% 30%), hsl(214 25% 40%));
+    --gradient-card: linear-gradient(145deg, hsl(214 20% 10%) 0%, hsl(214 18% 12%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(28 25% 65%) 0%, hsl(214 20% 30%) 100%);
     
-    --shadow-glow: 0 0 40px hsl(270 91% 65% / 0.3);
-    --shadow-card: 0 8px 32px hsl(240 15% 4% / 0.4);
-    --shadow-accent: 0 4px 20px hsl(45 93% 58% / 0.3);
+    --shadow-glow: 0 0 40px hsl(28 25% 65% / 0.3);
+    --shadow-card: 0 8px 32px hsl(214 25% 4% / 0.4);
+    --shadow-accent: 0 4px 20px hsl(28 25% 65% / 0.3);
     
-    --glass-bg: hsla(240, 15%, 8%, 0.8);
-    --glass-border: hsla(270, 91%, 65%, 0.1);
-    --border-glow: 1px solid hsl(270 91% 65% / 0.2);
+    --glass-bg: hsla(214, 20%, 10%, 0.8);
+    --glass-border: hsla(28, 25%, 65%, 0.1);
+    --border-glow: 1px solid hsl(28 25% 65% / 0.2);
 
-    --sidebar-background: 240 15% 6%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 270 91% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 15% 12%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 15% 15%;
-    --sidebar-ring: 270 91% 65%;
+    --sidebar-background: 214 25% 8%;
+    --sidebar-foreground: 28 18% 90%;
+    --sidebar-primary: 28 25% 65%;
+    --sidebar-primary-foreground: 214 25% 8%;
+    --sidebar-accent: 214 20% 15%;
+    --sidebar-accent-foreground: 28 18% 80%;
+    --sidebar-border: 214 15% 20%;
+    --sidebar-ring: 28 25% 65%;
   }
 }
 

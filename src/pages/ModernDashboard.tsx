@@ -2,6 +2,7 @@ import { ModernStatCard } from "@/components/ModernStatCard";
 import { ModernHeader } from "@/components/ModernHeader";
 import { ModernRevenueChart } from "@/components/ModernRevenueChart";
 import { ModernBuildingsList } from "@/components/ModernBuildingsList";
+import { useWidgetVisibility } from "@/hooks/useWidgetVisibility";
 import { 
   Building2, 
   PieChart, 
@@ -19,6 +20,9 @@ import { formatCurrency, formatNumber, formatPercentage, getStatusText } from "@
 import { OccupancyBreakdown } from "@/components/OccupancyBreakdown";
 
 export default function ModernDashboard() {
+  // Widget visibility control
+  const { isVisible, loading: widgetLoading } = useWidgetVisibility();
+  
   // Get real data from API
   const { data: overviewData, isLoading: overviewLoading, error: overviewError } = useOverview();
   const { data: revenueData, isLoading: revenueLoading } = useMonthlyRevenue();
@@ -26,7 +30,7 @@ export default function ModernDashboard() {
   const { data: occupancyData, isLoading: occupancyLoading } = useOccupancy();
 
   // Show loading state
-  if (overviewLoading || revenueLoading || buildingLoading || occupancyLoading) {
+  if (overviewLoading || revenueLoading || buildingLoading || occupancyLoading || widgetLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center" dir="rtl">
         <div className="text-center">
@@ -92,131 +96,144 @@ export default function ModernDashboard() {
           </Card>
         </div>
 
-          {/* Main Stats Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            <ModernStatCard
-              title="إجمالي المباني"
-              value={overviewData?.total_buildings?.toString() || "0"}
-              icon={Building2}
-              variant="primary"
-            />
-            <ModernStatCard
-              title="معدل الإشغال"
-              value={formatPercentage(occupancyData?.occupancy_rate || 0)}
-              icon={PieChart}
-              variant="accent"
-            />
-            <ModernStatCard
-              title="الإيرادات الشهرية"
-              value={formatCurrency(overviewData?.total_revenue || "0")}
-              icon={Banknote}
-              variant="success"
-            />
-            <ModernStatCard
-              title="المدفوعات المتأخرة"
-              value={overviewData?.overdue_payments?.toString() || "0"}
-              icon={AlertTriangle}
-              variant="warning"
-            />
-          </div>
+          {/* Main Stats Grid - Overview Statistics */}
+          {isVisible('overview') && (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+              <ModernStatCard
+                title="إجمالي المباني"
+                value={overviewData?.total_buildings?.toString() || "0"}
+                icon={Building2}
+                variant="primary"
+              />
+              <ModernStatCard
+                title="معدل الإشغال"
+                value={formatPercentage(occupancyData?.occupancy_rate || 0)}
+                icon={PieChart}
+                variant="accent"
+              />
+              <ModernStatCard
+                title="الإيرادات الشهرية"
+                value={formatCurrency(overviewData?.total_revenue || "0")}
+                icon={Banknote}
+                variant="success"
+              />
+              <ModernStatCard
+                title="المدفوعات المتأخرة"
+                value={overviewData?.overdue_payments?.toString() || "0"}
+                icon={AlertTriangle}
+                variant="warning"
+              />
+            </div>
+          )}
 
-          {/* Secondary Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            <ModernStatCard
-              title="إجمالي المحلات"
-              value={overviewData?.total_shops?.toString() || "0"}
-              icon={Target}
-              variant="primary"
-            />
-            <ModernStatCard
-              title="المستأجرين النشطين"
-              value={overviewData?.total_tenants?.toString() || "0"}
-              icon={Users}
-              variant="accent"
-            />
-            <ModernStatCard
-              title="العقود السارية"
-              value={overviewData?.active_contracts?.toString() || "0"}
-              icon={FileText}
-              variant="success"
-            />
-            <ModernStatCard
-              title="إجمالي الإيرادات"
-              value={formatCurrency(overviewData?.total_revenue || "0")}
-              icon={TrendingUp}
-              variant="warning"
-            />
-          </div>
+          {/* Secondary Stats - Collection Rates */}
+          {isVisible('collection_rates') && (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+              <ModernStatCard
+                title="إجمالي المحلات"
+                value={overviewData?.total_shops?.toString() || "0"}
+                icon={Target}
+                variant="primary"
+              />
+              <ModernStatCard
+                title="المستأجرين النشطين"
+                value={overviewData?.total_tenants?.toString() || "0"}
+                icon={Users}
+                variant="accent"
+              />
+              <ModernStatCard
+                title="العقود السارية"
+                value={overviewData?.active_contracts?.toString() || "0"}
+                icon={FileText}
+                variant="success"
+              />
+              <ModernStatCard
+                title="إجمالي الإيرادات"
+                value={formatCurrency(overviewData?.total_revenue || "0")}
+                icon={TrendingUp}
+                variant="warning"
+              />
+            </div>
+          )}
 
           {/* Charts Section */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
-            <div className="xl:col-span-2">
-              <ModernRevenueChart 
-                data={formattedRevenueData}
-                title="تطور الإيرادات"
-              />
-            </div>
+            {/* Monthly Revenue Chart */}
+            {isVisible('monthly_revenue') && (
+              <div className="xl:col-span-2">
+                <ModernRevenueChart 
+                  data={formattedRevenueData}
+                  title="تطور الإيرادات"
+                />
+              </div>
+            )}
             
             {/* Occupancy Breakdown */}
-            <div>
-              <OccupancyBreakdown />
-            </div>
+            {isVisible('occupancy') && (
+              <div className={isVisible('monthly_revenue') ? '' : 'xl:col-span-3'}>
+                <OccupancyBreakdown />
+              </div>
+            )}
           </div>
 
-          {/* Performance Overview */}
-          <Card className="glass-card border-accent/20">
-            <CardContent className="p-4 lg:p-6">
-              <h3 className="text-lg lg:text-xl font-bold mb-4 lg:mb-6 flex items-center gap-2">
-                <div className="p-2 bg-accent/10 rounded-lg">
-                  <TrendingUp className="h-5 w-5 text-accent" />
-                </div>
-                نظرة عامة على الأداء
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-                <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-success/20">
-                  <div>
-                    <p className="font-semibold text-success text-sm lg:text-base">الإيرادات المحققة</p>
-                    <p className="text-xs text-muted-foreground">إجمالي</p>
+          {/* Performance Overview - Annual Financial */}
+          {isVisible('annual_financial') && (
+            <Card className="glass-card border-accent/20">
+              <CardContent className="p-4 lg:p-6">
+                <h3 className="text-lg lg:text-xl font-bold mb-4 lg:mb-6 flex items-center gap-2">
+                  <div className="p-2 bg-accent/10 rounded-lg">
+                    <TrendingUp className="h-5 w-5 text-accent" />
                   </div>
-                  <div className="text-right">
-                    <p className="text-lg lg:text-xl font-bold gradient-text">
-                      {formatNumber(overviewData?.total_revenue || "0")}
-                    </p>
-                    <p className="text-xs text-success">ر.س</p>
-                  </div>
-                </div>
+                  نظرة عامة على الأداء
+                </h3>
                 
-                <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-accent/20">
-                  <div>
-                    <p className="font-semibold text-accent text-sm lg:text-base">معدل الإشغال</p>
-                    <p className="text-xs text-muted-foreground">متوسط المباني</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+                  <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-success/20">
+                    <div>
+                      <p className="font-semibold text-success text-sm lg:text-base">الإيرادات المحققة</p>
+                      <p className="text-xs text-muted-foreground">إجمالي</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                        {formatNumber(overviewData?.total_revenue || "0")}
+                      </p>
+                      <p className="text-xs text-success">ر.س</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-lg lg:text-xl font-bold gradient-text">
-                      {formatPercentage(occupancyData?.occupancy_rate || 0)}
-                    </p>
+                  
+                  <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-accent/20">
+                    <div>
+                      <p className="font-semibold text-accent text-sm lg:text-base">معدل الإشغال</p>
+                      <p className="text-xs text-muted-foreground">متوسط المباني</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                        {formatPercentage(occupancyData?.occupancy_rate || 0)}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-primary/20">
+                    <div>
+                      <p className="font-semibold text-primary text-sm lg:text-base">المحلات النشطة</p>
+                      <p className="text-xs text-muted-foreground">من أصل {occupancyData?.total_shops || 0}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                        {occupancyData?.occupied_shops || 0}
+                      </p>
+                      <p className="text-xs text-primary">مؤجرة</p>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="flex items-center justify-between p-3 lg:p-4 glass-card rounded-lg border border-primary/20">
-                  <div>
-                    <p className="font-semibold text-primary text-sm lg:text-base">المحلات النشطة</p>
-                    <p className="text-xs text-muted-foreground">من أصل {occupancyData?.total_shops || 0}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-lg lg:text-xl font-bold gradient-text">
-                      {occupancyData?.occupied_shops || 0}
-                    </p>
-                    <p className="text-xs text-primary">مؤجرة</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          )}
 
-          {/* Buildings List */}
-          <ModernBuildingsList buildings={formattedBuildingsData} />
+          {/* Buildings List - Building Performance */}
+          {isVisible('building_performance') && (
+            <ModernBuildingsList buildings={formattedBuildingsData} />
+          )}
         </main>
     </div>
   );

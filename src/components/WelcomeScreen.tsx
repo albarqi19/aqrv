@@ -29,7 +29,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
       <div className={`transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
         <div className="text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-مرحبا ألف 
+مرحبا بك 
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground">
           </p>

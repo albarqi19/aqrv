@@ -19,6 +19,9 @@ export function PinInput({ onSuccess }: PinInputProps) {
 
   // تحديد الشعار المناسب حسب الثيم
   const logoSrc = theme === 'dark' ? '/logo-dark.gif' : '/logo-light.gif';
+  
+  // تحديد صورة اسم الموقع حسب الثيم
+  const siteNameSrc = theme === 'dark' ? '/site-name-dark.png' : '/site-name-light.png';
 
   useEffect(() => {
     // التركيز على أول خانة عند التحميل
@@ -92,7 +95,19 @@ export function PinInput({ onSuccess }: PinInputProps) {
               }}
             />
           </div>
-          <p className="text-lg text-muted-foreground font-medium">نظام إدارة العقارات</p>
+          {/* صورة اسم الموقع */}
+          <div className="mx-auto mb-4 max-w-xs">
+            <img 
+              src={siteNameSrc}
+              alt="اسم الموقع"
+              className="w-full h-auto mx-auto object-contain"
+              onError={(e) => {
+                // في حالة فشل تحميل الصورة، عرض النص البديل
+                e.currentTarget.style.display = 'none';
+                // يمكن إضافة نص بديل هنا إذا لزم الأمر
+              }}
+            />
+          </div>
         </div>
 
         {/* بطاقة إدخال الرقم السري */}
