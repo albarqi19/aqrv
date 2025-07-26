@@ -7,7 +7,7 @@ export const useWidgetVisibility = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_BASE = 'http://localhost:8001/api';
+  const API_BASE = 'https://barq.fun/api';
 
   // جلب جميع الإعدادات
   const fetchAllSettings = async () => {
