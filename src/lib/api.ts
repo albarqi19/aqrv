@@ -88,13 +88,38 @@ export interface BuildingPerformanceData {
 class ApiClient {
   private async request<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`);
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          'User-Agent': 'AqariDashboard/1.0 (Mobile Compatible)',
+        },
+        mode: 'cors',
+        credentials: 'omit',
+      });
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
       }
-      return await response.json();
+      
+      const data = await response.json();
+      
+      // Log for debugging on mobile
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`✅ API Success ${endpoint}:`, data);
+      }
+      
+      return data;
     } catch (error) {
-      console.error(`API request failed for ${endpoint}:`, error);
+      console.error(`❌ API request failed for ${endpoint}:`, error);
+      
+      // More detailed error for mobile debugging
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error('خطأ في الشبكة - تأكد من الاتصال بالإنترنت');
+      }
+      
       throw error;
     }
   }

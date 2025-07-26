@@ -2,6 +2,7 @@ import { ModernStatCard } from "@/components/ModernStatCard";
 import { ModernHeader } from "@/components/ModernHeader";
 import { ModernRevenueChart } from "@/components/ModernRevenueChart";
 import { ModernBuildingsList } from "@/components/ModernBuildingsList";
+import { MobileErrorFallback } from "@/components/MobileErrorFallback";
 import { useWidgetVisibility } from "@/hooks/useWidgetVisibility";
 import { 
   Building2, 
@@ -45,11 +46,14 @@ export default function ModernDashboard() {
   // Show error state
   if (overviewError) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center" dir="rtl">
-        <div className="text-center">
-          <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-destructive" />
-          <h2 className="text-xl font-semibold mb-2">خطأ في تحميل البيانات</h2>
-          <p className="text-muted-foreground">تعذر الاتصال بالخادم. يرجى المحاولة لاحقاً</p>
+      <div className="min-h-screen bg-background flex items-center justify-center p-4" dir="rtl">
+        <div className="w-full max-w-md">
+          <MobileErrorFallback 
+            error={overviewError}
+            onRetry={() => window.location.reload()}
+            title="فشل في تحميل البيانات"
+            description="تعذر الاتصال بالخادم. قد تكون المشكلة في الشبكة أو الخادم."
+          />
         </div>
       </div>
     );
