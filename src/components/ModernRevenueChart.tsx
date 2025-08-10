@@ -60,7 +60,7 @@ export function ModernRevenueChart({ data, title }: ModernRevenueChartProps) {
             {title}
           </CardTitle>
           <div className="text-right">
-            <p className="text-2xl font-bold gradient-text">
+            <p className="text-2xl font-bold text-foreground">
               {growth > 0 ? '+' : ''}{growth.toFixed(1)}%
             </p>
             <p className="text-xs text-muted-foreground">نمو سنوي</p>

@@ -199,7 +199,7 @@ export default function ModernDashboard() {
                       <p className="text-xs text-muted-foreground">إجمالي</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                      <p className="text-lg lg:text-xl font-bold text-foreground">
                         {formatNumber(overviewData?.total_revenue || "0")}
                       </p>
                       <p className="text-xs text-success">ر.س</p>
@@ -212,7 +212,7 @@ export default function ModernDashboard() {
                       <p className="text-xs text-muted-foreground">متوسط المباني</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                      <p className="text-lg lg:text-xl font-bold text-foreground">
                         {formatPercentage(occupancyData?.occupancy_rate || 0)}
                       </p>
                     </div>
@@ -224,7 +224,7 @@ export default function ModernDashboard() {
                       <p className="text-xs text-muted-foreground">من أصل {occupancyData?.total_shops || 0}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg lg:text-xl font-bold gradient-text">
+                      <p className="text-lg lg:text-xl font-bold text-foreground">
                         {occupancyData?.occupied_shops || 0}
                       </p>
                       <p className="text-xs text-primary">مؤجرة</p>

@@ -103,19 +103,19 @@ export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
                   <div className="text-center p-2 lg:p-4 glass-card rounded-lg border border-success/20 group-hover:border-success/40 transition-colors">
                     <TrendingUp className="h-4 w-4 lg:h-5 lg:w-5 text-success mx-auto mb-1 lg:mb-2" />
                     <p className="text-xs text-muted-foreground mb-1">الإيراد</p>
-                    <p className="font-bold text-xs lg:text-sm gradient-text">{building.revenue}</p>
+                    <p className="font-bold text-xs lg:text-sm text-foreground">{building.revenue}</p>
                   </div>
                   
                   <div className="text-center p-2 lg:p-4 glass-card rounded-lg border border-accent/20 group-hover:border-accent/40 transition-colors">
                     <Users className="h-4 w-4 lg:h-5 lg:w-5 text-accent mx-auto mb-1 lg:mb-2" />
                     <p className="text-xs text-muted-foreground mb-1">الإشغال</p>
-                    <p className="font-bold text-xs lg:text-sm gradient-text">{building.occupancy}</p>
+                    <p className="font-bold text-xs lg:text-sm text-foreground">{building.occupancy}</p>
                   </div>
                   
                   <div className="text-center p-2 lg:p-4 glass-card rounded-lg border border-primary/20 group-hover:border-primary/40 transition-colors">
                     <Building2 className="h-4 w-4 lg:h-5 lg:w-5 text-primary mx-auto mb-1 lg:mb-2" />
                     <p className="text-xs text-muted-foreground mb-1">المحلات</p>
-                    <p className="font-bold text-xs lg:text-sm gradient-text">{building.shops}</p>
+                    <p className="font-bold text-xs lg:text-sm text-foreground">{building.shops}</p>
                   </div>
                 </div>
 

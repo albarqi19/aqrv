@@ -11,7 +11,7 @@ export const formatCurrency = (amount: string | number | undefined | null): stri
     return '0 ر.س';
   }
   
-  return numAmount.toLocaleString('ar-SA') + ' ر.س';
+  return numAmount.toLocaleString('en-US') + ' ر.س';
 };
 
 export const formatNumber = (num: string | number | undefined | null): string => {
@@ -25,7 +25,7 @@ export const formatNumber = (num: string | number | undefined | null): string =>
     return '0';
   }
   
-  return number.toLocaleString('ar-SA');
+  return number.toLocaleString('en-US');
 };
 
 export const formatPercentage = (value: number | undefined | null): string => {
