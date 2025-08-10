@@ -72,7 +72,8 @@ export default function ModernDashboard() {
     revenue: formatCurrency(building.monthly_revenue),
     occupancy: formatPercentage(building.occupancy_rate),
     shops: `${building.occupied_shops || 0}/${building.total_shops || 0}`,
-    status: getStatusText(building.occupancy_rate || 0) as "ممتاز" | "جيد" | "ضعيف"
+    status: getStatusText(building.occupancy_rate || 0) as "ممتاز" | "جيد" | "ضعيف",
+    returnRate: `${(building.return_rate || 0).toFixed(2)}%`
   })) : [];
 
   return (
@@ -88,7 +89,7 @@ export default function ModernDashboard() {
             <CardContent className="p-4 lg:p-8">
               <div className="flex flex-col items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold mb-2 gradient-text">
+                  <h2 className="text-2xl lg:text-3xl font-bold mb-2 text-muted-foreground">
                     مرحباً بك في لوحة العرض
                   </h2>
                   <p className="text-base lg:text-lg text-muted-foreground">

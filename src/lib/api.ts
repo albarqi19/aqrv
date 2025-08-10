@@ -81,6 +81,7 @@ export interface BuildingPerformanceData {
     monthly_revenue: number;
     total_shops: number;
     occupied_shops: number;
+    return_rate: number;
   }>;
 }
 

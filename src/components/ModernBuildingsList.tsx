@@ -10,6 +10,7 @@ interface ModernBuilding {
   occupancy: string;
   shops: string;
   status: "ممتاز" | "جيد" | "ضعيف";
+  returnRate: string;
 }
 
 interface ModernBuildingsListProps {
@@ -80,9 +81,14 @@ export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 lg:gap-3 mb-2">
                       <h3 className="text-base lg:text-lg font-bold">{building.name}</h3>
-                      <Badge className={`${statusConfig.color} ${statusConfig.glow} text-xs px-2 py-1`}>
-                        {building.status}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <Badge className={`${statusConfig.color} ${statusConfig.glow} text-xs px-2 py-1`}>
+                          {building.status}
+                        </Badge>
+                        <Badge className="bg-primary/10 text-primary border-primary/20 text-xs px-2 py-1">
+                          معدل العائد السنوي: {building.returnRate}
+                        </Badge>
+                      </div>
                     </div>
                     <p className="text-xs lg:text-sm text-muted-foreground">المبنى رقم {building.id}</p>
                   </div>
