@@ -69,12 +69,20 @@ export default function ModernDashboard() {
   const formattedBuildingsData = buildingData?.buildings ? buildingData.buildings.map(building => ({
     id: building.id,
     name: building.name || 'مبنى غير محدد',
-    revenue: formatCurrency(building.monthly_revenue),
+    revenue: formatCurrency(building.revenue.toString()), // الإيراد السنوي الكلي
     occupancy: formatPercentage(building.occupancy_rate),
     shops: `${building.occupied_shops || 0}/${building.total_shops || 0}`,
     status: getStatusText(building.occupancy_rate || 0) as "ممتاز" | "جيد" | "ضعيف",
-    returnRate: `${(building.return_rate || 0).toFixed(2)}%`
+    returnRate: `${(building.return_rate || 0).toFixed(2)}%`,
+    // بيانات إضافية للـ Bottom Sheet
+    buildingValue: building.building_value,
+    paidRevenue: building.paid_revenue,
+    paidReturnRate: building.paid_return_rate
   })) : [];
+
+  // حساب إجمالي الإيراد السنوي
+  const totalAnnualRevenue = buildingData?.buildings ? 
+    buildingData.buildings.reduce((total, building) => total + (building.revenue || 0), 0) : 0;
 
   return (
     <div className="min-h-screen bg-background" dir="rtl">
@@ -153,33 +161,23 @@ export default function ModernDashboard() {
                 variant="success"
               />
               <ModernStatCard
-                title="إجمالي الإيرادات"
-                value={formatCurrency(overviewData?.total_revenue || "0")}
+                title="إجمالي الإيرادات السنوية"
+                value={formatCurrency(totalAnnualRevenue.toString())}
                 icon={TrendingUp}
                 variant="warning"
               />
             </div>
           )}
 
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
-            {/* Monthly Revenue Chart */}
-            {isVisible('monthly_revenue') && (
-              <div className="xl:col-span-2">
-                <ModernRevenueChart 
-                  data={formattedRevenueData}
-                  title="تطور الإيرادات"
-                />
-              </div>
-            )}
-            
-            {/* Occupancy Breakdown */}
-            {isVisible('occupancy') && (
-              <div className={isVisible('monthly_revenue') ? '' : 'xl:col-span-3'}>
-                <OccupancyBreakdown />
-              </div>
-            )}
-          </div>
+          {/* Occupancy Breakdown */}
+          {isVisible('occupancy') && (
+            <OccupancyBreakdown />
+          )}
+
+          {/* Buildings List - Building Performance */}
+          {isVisible('building_performance') && (
+            <ModernBuildingsList buildings={formattedBuildingsData} />
+          )}
 
           {/* Performance Overview - Annual Financial */}
           {isVisible('annual_financial') && (
@@ -235,10 +233,18 @@ export default function ModernDashboard() {
             </Card>
           )}
 
-          {/* Buildings List - Building Performance */}
-          {isVisible('building_performance') && (
-            <ModernBuildingsList buildings={formattedBuildingsData} />
-          )}
+          {/* Charts Section */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+            {/* Monthly Revenue Chart */}
+            {isVisible('monthly_revenue') && (
+              <div className="xl:col-span-3">
+                <ModernRevenueChart 
+                  data={formattedRevenueData}
+                  title="تطور الإيرادات"
+                />
+              </div>
+            )}
+          </div>
         </main>
     </div>
   );

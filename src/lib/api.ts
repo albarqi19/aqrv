@@ -78,10 +78,13 @@ export interface BuildingPerformanceData {
     id: number;
     name: string;
     occupancy_rate: number;
-    monthly_revenue: number;
+    revenue: number; // الإيراد السنوي الكلي
+    paid_revenue: number; // الإيراد المدفوع
     total_shops: number;
     occupied_shops: number;
+    building_value: string;
     return_rate: number;
+    paid_return_rate: number;
   }>;
 }
 
