@@ -77,7 +77,7 @@ export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-4">
+      <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {buildings.map((building, index) => {
           const statusConfig = getStatusConfig(building.status);
           
