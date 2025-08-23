@@ -2,16 +2,16 @@
 
 export const formatCurrency = (amount: string | number | undefined | null): string => {
   if (amount === undefined || amount === null || amount === '') {
-    return '0 ر.س';
+    return '0 ﷼';
   }
   
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
   
   if (isNaN(numAmount)) {
-    return '0 ر.س';
+    return '0 ﷼';
   }
   
-  return numAmount.toLocaleString('en-US') + ' ر.س';
+  return numAmount.toLocaleString('en-US') + ' ﷼';
 };
 
 export const formatNumber = (num: string | number | undefined | null): string => {

@@ -111,7 +111,7 @@ export default function ModernDashboard() {
 
           {/* Main Stats Grid - Overview Statistics */}
           {isVisible('overview') && (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               <ModernStatCard
                 title="إجمالي المباني"
                 value={overviewData?.total_buildings?.toString() || "0"}
@@ -124,12 +124,12 @@ export default function ModernDashboard() {
                 icon={PieChart}
                 variant="accent"
               />
-              <ModernStatCard
+              {/* <ModernStatCard
                 title="الإيرادات الشهرية"
                 value={formatCurrency(overviewData?.total_revenue || "0")}
                 icon={Banknote}
                 variant="success"
-              />
+              /> */}
               <ModernStatCard
                 title="المدفوعات المتأخرة"
                 value={overviewData?.overdue_payments?.toString() || "0"}
@@ -200,7 +200,7 @@ export default function ModernDashboard() {
                       <p className="text-lg lg:text-xl font-bold text-foreground">
                         {formatNumber(overviewData?.total_revenue || "0")}
                       </p>
-                      <p className="text-xs text-success">ر.س</p>
+                      <p className="text-xs text-success">﷼</p>
                     </div>
                   </div>
                   
@@ -235,15 +235,15 @@ export default function ModernDashboard() {
 
           {/* Charts Section */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
-            {/* Monthly Revenue Chart */}
-            {isVisible('monthly_revenue') && (
+            {/* Monthly Revenue Chart - Hidden */}
+            {/* {isVisible('monthly_revenue') && (
               <div className="xl:col-span-3">
                 <ModernRevenueChart 
                   data={formattedRevenueData}
                   title="تطور الإيرادات"
                 />
               </div>
-            )}
+            )} */}
           </div>
         </main>
     </div>

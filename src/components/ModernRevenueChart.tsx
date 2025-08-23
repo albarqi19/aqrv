@@ -14,7 +14,7 @@ interface ModernRevenueChartProps {
 
 export function ModernRevenueChart({ data, title }: ModernRevenueChartProps) {
   const formatCurrency = (value: number) => {
-    return `${(value / 1000).toFixed(0)}ك ر.س`;
+    return `${(value / 1000).toFixed(0)}ك ﷼`;
   };
 
   // Handle empty data
