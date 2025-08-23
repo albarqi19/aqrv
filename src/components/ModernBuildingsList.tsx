@@ -2,9 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Building2, TrendingUp, Users, Eye, MoreVertical, DollarSign, PieChart, Calculator } from "lucide-react";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/utils-data";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ModernBuilding {
   id: number;
@@ -51,11 +53,93 @@ const getStatusConfig = (status: string) => {
 export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
   const [selectedBuilding, setSelectedBuilding] = useState<ModernBuilding | null>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleBuildingClick = (building: ModernBuilding) => {
     setSelectedBuilding(building);
-    setIsSheetOpen(true);
+    if (isMobile) {
+      setIsSheetOpen(true);
+    } else {
+      setIsDialogOpen(true);
+    }
   };
+
+  const closeModal = () => {
+    setIsSheetOpen(false);
+    setIsDialogOpen(false);
+    setSelectedBuilding(null);
+  };
+
+  // Component لمحتوى تفاصيل المبنى
+  const BuildingDetailsContent = ({ building }: { building: ModernBuilding }) => (
+    <div className="mt-6 space-y-6">
+      {/* معلومات أساسية */}
+      <div className="grid grid-cols-2 gap-4">
+        <Card className="glass-card p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <DollarSign className="h-5 w-5 text-success" />
+            <span className="text-sm text-muted-foreground">الإيراد السنوي</span>
+          </div>
+          <p className="text-lg font-bold text-foreground/90">{building.revenue}</p>
+        </Card>
+
+        <Card className="glass-card p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <Calculator className="h-5 w-5 text-primary" />
+            <span className="text-sm text-muted-foreground">قيمة المبنى</span>
+          </div>
+          <p className="text-lg font-bold text-foreground/90">{formatCurrency(building.buildingValue)}</p>
+        </Card>
+      </div>
+
+      {/* معلومات العائد */}
+      <div className="grid grid-cols-2 gap-4">
+        <Card className="glass-card p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <TrendingUp className="h-5 w-5 text-accent" />
+            <span className="text-sm text-muted-foreground">معدل العائد السنوي</span>
+          </div>
+          <p className="text-lg font-bold text-foreground/90">{building.returnRate}</p>
+        </Card>
+
+        <Card className="glass-card p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <PieChart className="h-5 w-5 text-warning" />
+            <span className="text-sm text-muted-foreground">الإيراد المدفوع</span>
+          </div>
+          <p className="text-lg font-bold text-foreground/90">{formatCurrency(building.paidRevenue.toString())}</p>
+        </Card>
+      </div>
+
+      {/* معلومات الإشغال */}
+      <Card className="glass-card p-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Users className="h-5 w-5 text-primary" />
+            <span className="text-sm text-muted-foreground">معلومات الإشغال</span>
+          </div>
+          <Badge className={`${getStatusConfig(building.status).color}`}>
+            {building.status}
+          </Badge>
+        </div>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-sm">المحلات المشغولة</span>
+            <span className="font-semibold">{building.shops}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-sm">نسبة الإشغال</span>
+            <span className="font-semibold">{building.occupancy}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-sm">معدل العائد المدفوع</span>
+            <span className="font-semibold">{building.paidReturnRate.toFixed(2)}%</span>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
 
   return (
     <>
@@ -155,7 +239,7 @@ export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
       </CardContent>
     </Card>
 
-    {/* Bottom Sheet للمعلومات التفصيلية */}
+    {/* Bottom Sheet للأجهزة المحمولة */}
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <SheetContent side="bottom" className="h-[80vh] rounded-t-3xl border-t-primary/20" dir="rtl">
         <SheetHeader className="text-center">
@@ -164,76 +248,22 @@ export function ModernBuildingsList({ buildings }: ModernBuildingsListProps) {
           </SheetTitle>
         </SheetHeader>
         
-        {selectedBuilding && (
-          <div className="mt-6 space-y-6">
-            {/* معلومات أساسية */}
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="glass-card p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <DollarSign className="h-5 w-5 text-success" />
-                  <span className="text-sm text-muted-foreground">الإيراد السنوي</span>
-                </div>
-                <p className="text-lg font-bold text-foreground/90">{selectedBuilding.revenue}</p>
-              </Card>
-
-              <Card className="glass-card p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <Calculator className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-muted-foreground">قيمة المبنى</span>
-                </div>
-                <p className="text-lg font-bold text-foreground/90">{formatCurrency(selectedBuilding.buildingValue)}</p>
-              </Card>
-            </div>
-
-            {/* معلومات العائد */}
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="glass-card p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <TrendingUp className="h-5 w-5 text-accent" />
-                  <span className="text-sm text-muted-foreground">معدل العائد السنوي</span>
-                </div>
-                <p className="text-lg font-bold text-foreground/90">{selectedBuilding.returnRate}</p>
-              </Card>
-
-              <Card className="glass-card p-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <PieChart className="h-5 w-5 text-warning" />
-                  <span className="text-sm text-muted-foreground">الإيراد المدفوع</span>
-                </div>
-                <p className="text-lg font-bold text-foreground/90">{formatCurrency(selectedBuilding.paidRevenue.toString())}</p>
-              </Card>
-            </div>
-
-            {/* معلومات الإشغال */}
-            <Card className="glass-card p-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-muted-foreground">معلومات الإشغال</span>
-                </div>
-                <Badge className={`${getStatusConfig(selectedBuilding.status).color}`}>
-                  {selectedBuilding.status}
-                </Badge>
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm">المحلات المشغولة</span>
-                  <span className="font-semibold">{selectedBuilding.shops}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm">نسبة الإشغال</span>
-                  <span className="font-semibold">{selectedBuilding.occupancy}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm">معدل العائد المدفوع</span>
-                  <span className="font-semibold">{selectedBuilding.paidReturnRate.toFixed(2)}%</span>
-                </div>
-              </div>
-            </Card>
-          </div>
-        )}
+        {selectedBuilding && <BuildingDetailsContent building={selectedBuilding} />}
       </SheetContent>
     </Sheet>
+
+    {/* Modal Dialog للشاشات الكبيرة */}
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" dir="rtl">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-bold text-center">
+            {selectedBuilding?.name}
+          </DialogTitle>
+        </DialogHeader>
+        
+        {selectedBuilding && <BuildingDetailsContent building={selectedBuilding} />}
+      </DialogContent>
+    </Dialog>
     </>
   );
 }
